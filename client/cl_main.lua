@@ -36,7 +36,8 @@ Citizen.CreateThread(function()
             hunger = JSX.Math.Round(hunger),
             thirst = JSX.Math.Round(thirst),
             stress = JSX.Math.Round(stress) or 0,
-            IsPedInAnyVehicle = IsPedInAnyVehicle(PlayerPedId())
+            IsPedInAnyVehicle = IsPedInAnyVehicle(PlayerPedId()),
+            whenUse = true
         })
 
         DisplayRadar(IsPedInAnyVehicle(PlayerPedId()))
