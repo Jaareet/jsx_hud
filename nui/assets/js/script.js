@@ -2,55 +2,45 @@ $(() => {
     addEventListener('message', event => {
         const e = event.data
 
-        if (e.type === 'toggleHud') {
-            const body = document.getElementById('statusHud');
-
-            if (e.toggle) {
-                body.style.opacity = '1';
-            } else if (e.toggle === false) {
-                body.style.opacity = '0';
-            }
-        }
-
         if (e.type === 'updateElements') {
-            if (e.whenUse) {
-                if (Math.round(e.health) > 50) {
+            if (e.hud.methods.whenUse) {
+                if (Math.round(e.status.data.health) >= 80) {
                     $("#health").hide()
-                } else if (Math.round(e.health) < 50) {
+                } else if (Math.round(e.status.data.health) <= 80) {
                     $("#health").show()
                 }
-                if (Math.round(e.shield) > 50) {
+                if (Math.round(e.status.data.shield) >= 80) {
                     $("#shield").show()
-                } else if (Math.round(e.shield) < 50) {
+                } else if (Math.round(e.status.data.shield) <= 80) {
                     $("#shield").hide()
                 }
-                if (Math.round(e.hunger) > 50) {
+                if (Math.round(e.status.data.hunger) >= 80) {
                     $("#hunger").hide()
-                } else if (Math.round(e.hunger) < 50) {
+                } else if (Math.round(e.status.data.hunger) <= 80) {
                     $("#hunger").show()
                 }
-                if (Math.round(e.thirst) > 50) {
+                if (Math.round(e.status.data.thirst) >= 80) {
                     $("#thirst").hide()
-                } else if (Math.round(e.thirst) < 50) {
+                } else if (Math.round(e.status.data.thirst) <= 80) {
                     $("#thirst").show()
                 }
-                if (Math.round(e.thirst) > 50) {
+                if (Math.round(e.status.data.stress) >= 80) {
                     $("#stress").hide()
-                } else if (Math.round(e.thirst) < 50) {
+                } else if (Math.round(e.status.data.stress) <= 80) {
                     $("#stress").show()
                 }
             }
 
-            document.getElementById('healthVal').innerHTML = e.health;
-            document.getElementById('shieldVal').innerHTML = e.shield;
-            document.getElementById('hungerVal').innerHTML = e.hunger;
-            document.getElementById('thirstVal').innerHTML = e.thirst;
-            document.getElementById('stressVal').innerHTML = e.stress;
+            $('#healthVal').text(e.status.data.health + '%')
+            $('#shieldVal').text(e.status.data.shield + '%')
+            $('#hungerVal').text(e.status.data.hunger + '%')
+            $('#thirstVal').text(e.status.data.thirst + '%')
+            $('#stressVal').text(e.status.data.stress + '%')
 
-            if (e.IsPedInAnyVehicle) {
-                $('#statusHud').css({ 'left': '15%' })
+            if (e.global.IsPedInAnyVehicle) {
+                $('.statusHud').css({ 'left': '16%' })
             } else {
-                $('#statusHud').css({ 'left': '1%' })
+                $('.statusHud').css({ 'left': '1%' })
             }
         }
     })

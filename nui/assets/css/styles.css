@@ -1,52 +1,45 @@
-body {
-    user-select: none;
+body, html {
     overflow: hidden;
-}
-
-#statusHud {
-    position: absolute;
-    bottom: 1%;
-    left: 1%;
-    display: flex;
-    flex-direction: column;
-    transition: .4s;
-    -webkit-transition: .4s;
-    -moz-transition: .4s;
-    -ms-transition: .4s;
-    -o-transition: .4s;
+    user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 .statusHud {
-    font-size: .7vw;
-    position: relative;
+    position: absolute;
+    bottom: 3%;
+    left: 1%;
     display: flex;
-    width: 3vw;
-    height: 1.5vw;
-    padding-left: 0.2vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: .4s;
+}
+
+.statusContainer {
+    position: relative;
+    margin-top: 0.1vw;
+    background-color: #111;
+    border: .040vw solid #000;
     border-top-right-radius: 1vw;
     border-bottom-right-radius: 1vw;
-    background-color: #111;
-    border: .020vw solid #000;
-    margin-top: 0.12vw;
-    color: #fff;
-    align-items: center;
-}
-
-.statusHud i {
-    /* float: left; */
-    margin-right: 0.2vw;
-    margin-left: 0.1vw;
-    position: relative;
-    /* top: 50%; */
-    /* transform: translateY(-50%); */
-}
-
-.statusText span {
+    width: 4vw;
+    height: 1.7vw;
     display: flex;
-    position: relative;
-    font-size: .6vw;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto Condensed';
+    font-size: .8vw;
+    color: #ffff;
+}
+
+.statusFlex i {
     position: absolute;
-    right: 10%;
+    top: 50%;
     transform: translateY(-50%);
-    font-family: 'Roboto'
+    left: 10%;
+}
+
+.statusFlex {
+    margin-left: 0.7vw;
 }

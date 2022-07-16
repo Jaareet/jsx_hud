@@ -3,57 +3,54 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://jaareet.es/utils/fv6/css/all.css">
+    <meta name="description" content="FiveM Cfx.re NUI (<@Jaareet#0097>)">
+    <meta name = "og:image" content = "https://jaareet.es/logo.jpg"> 
+
     <link rel="stylesheet" href="./assets/css/styles.css">
     <link rel="shortcut icon" href="https://jaareet.es/logo.jpg" type="image/x-icon">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@600&family=Quicksand:wght@500&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://jaareet.es/utils/fv6/css/all.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Nunito&family=Nunito+Sans:wght@600&family=Quicksand:wght@500&family=Roboto+Condensed&family=Roboto:wght@300&display=swap" rel="stylesheet">
 
     <script src="https://jaareet.es/utils/jquery/loader.js"></script>
     <script src="./assets/js/script.js"></script>
 
-    <title>Hud App</title>
+    <title>JSX-Framework - Status</title>
 </head>
     <body>
-        <div id="statusHud">
-            <div class="statusHud" id = 'health'>
-                <div class="statusText">
+        <div class="statusHud">
+            <div class="statusContainer" id = 'health'>
+                <div class="statusFlex">
                     <i class="fa-solid fa-wave-pulse"></i>
                 </div>
-                <div class="statusText">
-                    <span class="statusTextVal" id="healthVal">N/A</span>
-                </div>
+                <div class="statusFlex" id = 'healthVal'>100%</div>
             </div>
-            <div class="statusHud" id = 'shield'>
-                <div class="statusText">
+
+            <div class="statusContainer" id = 'shield'>
+                <div class="statusFlex">
                     <i class="fa-solid fa-user-shield"></i>
                 </div>
-                <div class="statusText">
-                    <span class="statusTextVal" id="shieldVal">N/A</span>
-                </div>
+                <div class="statusFlex" id = 'shieldVal'>0%</div>
             </div>
-            <div class="statusHud" id = 'hunger'>
-                <div class="statusText">
+
+            <div class="statusContainer" id = 'hunger'>
+                <div class="statusFlex">
                     <i class="fa-solid fa-bread-loaf"></i>
                 </div>
-                <div class="statusText">
-                    <span class="statusTextVal" id="hungerVal">N/A</span>
-                </div>
+                <div class="statusFlex" id = 'hungerVal'>100%</div>
             </div>
-            <div class="statusHud" id = 'thirst'>
-                <div class="statusText">
+
+            <div class="statusContainer" id = 'thirst'>
+                <div class="statusFlex">
                     <i class="fa-solid fa-whiskey-glass"></i>
                 </div>
-                <div class="statusText">
-                    <span class="statusTextVal" id="thirstVal">N/A</span>
-                </div>
+                <div class="statusFlex" id = 'thirstVal'>100%</div>
             </div>
-            <div class="statusHud" id = 'stress'>
-                <div class="statusText">
+
+            <div class="statusContainer" id = 'stress'>
+                <div class="statusFlex">
                     <i class="fa-solid fa-head-side-brain"></i>
                 </div>
-                <div class="statusText">
-                    <span class="statusTextVal" id="stressVal">N/A</span>
-                </div>
+                <div class="statusFlex" id = 'stressVal'>100%</div>
             </div>
         </div>
     </body>

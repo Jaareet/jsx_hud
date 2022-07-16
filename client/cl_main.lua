@@ -1,47 +1,71 @@
-local JSX = {}
+local JSX = exports['es_extended']:getSharedObject()
 
-Citizen.CreateThread(function()
-    while (true) do
-        TriggerEvent('esx:getSharedObject', function(obj)
-            JSX = obj
-        end)
-        Citizen.Wait(2000)
+RegisterNetEvent('esx:playerLoaded', function(xPlayer)
+    JSX.PlayerData = xPlayer
+
+    while (JSX.PlayerData ~= nil) do
+        Citizen.Wait(50)
     end
 
-    while (JSX.GetPlayerData() ~= nil) do
-        Citizen.Wait(100)
-    end
-
-    JSX.PlayerData = JSX.GetPlayerData()
+    StartHudLoop()
 end)
 
-Citizen.CreateThread(function()
-    while (true) do
-        TriggerEvent('esx_status:getStatus', 'hunger', function(status)
-            hunger = math.ceil(status.val / 10000)
-        end)
+RegisterNetEvent('onResourceStart', function(xResource)
+    if (xResource == GetCurrentResourceName()) then
+        JSX.PlayerData = JSX.GetPlayerData()
 
-        TriggerEvent('esx_status:getStatus', 'thirst', function(status)
-            thirst = math.ceil(status.val / 10000)
-        end)
+        while (JSX.PlayerData ~= nil) do
+            Citizen.Wait(50)
+        end
 
-        TriggerEvent('esx_status:getStatus', 'stress', function(status)
-            stress = math.ceil(status.val / 10000)
-        end)
-
-        SendNUIMessage({
-            type = 'updateElements',
-            health = math.ceil(GetEntityHealth(PlayerPedId()) / 2),
-            shield = GetPedArmour(PlayerPedId()),
-            hunger = JSX.Math.Round(hunger),
-            thirst = JSX.Math.Round(thirst),
-            stress = JSX.Math.Round(stress) or 0,
-            IsPedInAnyVehicle = IsPedInAnyVehicle(PlayerPedId()),
-            whenUse = true
-        })
-
-        DisplayRadar(IsPedInAnyVehicle(PlayerPedId()))
-
-        Citizen.Wait(IsPedInAnyVehicle(PlayerPedId()) and 500 or 1000)
+        StartHudLoop()
     end
 end)
+
+function StartHudLoop()
+    Citizen.CreateThread(function()
+        local health, shield = 0, 0
+
+        while (true) do
+            TriggerEvent('esx_status:getStatus', 'hunger', function(status)
+                hunger = math.ceil(status.val / 10000)
+            end)
+
+            TriggerEvent('esx_status:getStatus', 'thirst', function(status)
+                thirst = math.ceil(status.val / 10000)
+            end)
+
+            TriggerEvent('esx_status:getStatus', 'stress', function(status)
+                stress = math.ceil(status.val / 10000)
+            end)
+
+            SendNUIMessage({
+                type = 'updateElements',
+
+                hud = {
+                    methods = {
+                        whenUse = true
+                    }
+                },
+
+                status = {
+                    data = {
+                        health = math.ceil(GetEntityHealth(PlayerPedId()) / 2),
+                        shield = GetPedArmour(PlayerPedId()),
+                        hunger = JSX.Math.Round(hunger),
+                        thirst = JSX.Math.Round(thirst),
+                        stress = JSX.Math.Round(stress or 100)
+                    }
+                },
+
+                global = {
+                    IsPedInAnyVehicle = IsPedInAnyVehicle(PlayerPedId())
+                }
+            })
+
+            DisplayRadar(IsPedInAnyVehicle(PlayerPedId()))
+
+            Citizen.Wait(IsPedInAnyVehicle(PlayerPedId()) and 500 or 1000)
+        end
+    end)
+end
